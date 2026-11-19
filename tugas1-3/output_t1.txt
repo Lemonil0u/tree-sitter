@@ -1,0 +1,19 @@
+=== POHON FUNGSI ===
+(module (function_definition name: (identifier) parameters: (parameters (identifier)) body: (block (return_statement (identifier)))))
+def anonim
+identifier bernama
+parameters bernama
+( anonim
+identifier bernama
+) anonim
+: anonim
+block bernama
+
+=== POHON IF/ELSE ===
+(module (if_statement condition: (comparison_operator (identifier) (integer)) consequence: (block (expression_statement (assignment left: (identifier) right: (integer)))) alternative: (else_clause body: (block (expression_statement (assignment left: (identifier) right: (integer)))))))
+
+=== POHON CLASS ===
+(module (class_definition name: (identifier) body: (block (function_definition name: (identifier) parameters: (parameters (identifier)) body: (block (return_statement (true)))))))
+
+=== POHON ERROR ===
+(module (ERROR (identifier) (parameters (identifier)) (identifier)))

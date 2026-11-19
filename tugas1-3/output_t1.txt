@@ -8,6 +8,8 @@ identifier bernama
 ) anonim
 : anonim
 block bernama
+Jumlah children: 5 ['def', 'identifier', 'parameters', ':', 'block']
+Jumlah named_children: 3 ['identifier', 'parameters', 'block']
 
 === POHON IF/ELSE ===
 (module (if_statement condition: (comparison_operator (identifier) (integer)) consequence: (block (expression_statement (assignment left: (identifier) right: (integer)))) alternative: (else_clause body: (block (expression_statement (assignment left: (identifier) right: (integer)))))))

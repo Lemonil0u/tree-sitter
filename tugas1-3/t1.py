@@ -19,6 +19,10 @@ for c in tree1.root_node.children[0].children:
         for anak_param in c.children:
             print(anak_param.type, "bernama" if anak_param.is_named else "anonim")
 
+fn_node = tree1.root_node.children[0]
+print("Jumlah children:", len(fn_node.children), [c.type for c in fn_node.children])
+print("Jumlah named_children:", len(fn_node.named_children), [c.type for c in fn_node.named_children])
+
 # Potongan 2: If/Else
 kode_if = b"""if x > 0:
     y = 1

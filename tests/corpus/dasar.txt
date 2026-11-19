@@ -1,0 +1,127 @@
+==================
+Tes 1: Perbandingan string dasar
+==================
+
+status = "open"
+
+---
+
+(query
+  (comparison
+    field: (identifier)
+    value: (string)))
+
+==================
+Tes 2: Perbandingan angka dan operator >=
+==================
+
+priority >= 2
+
+---
+
+(query
+  (comparison
+    field: (identifier)
+    value: (number)))
+
+==================
+Tes 3: Ekspresi logika and
+==================
+
+a = 1 and b = 2
+
+---
+
+(query
+  (and_expression
+    left: (comparison
+      field: (identifier)
+      value: (number))
+    right: (comparison
+      field: (identifier)
+      value: (number))))
+
+==================
+Tes 4: Prioritas and lebih kuat dari or
+==================
+
+a = 1 or b = 2 and c = 3
+
+---
+
+(query
+  (or_expression
+    left: (comparison
+      field: (identifier)
+      value: (number))
+    right: (and_expression
+      left: (comparison
+        field: (identifier)
+        value: (number))
+      right: (comparison
+        field: (identifier)
+        value: (number)))))
+
+==================
+Tes 5: Tanda kurung mengubah prioritas
+==================
+
+(a = 1 or b = 2) and c = 3
+
+---
+
+(query
+  (and_expression
+    left: (parenthesized
+      (or_expression
+        left: (comparison
+          field: (identifier)
+          value: (number))
+        right: (comparison
+          field: (identifier)
+          value: (number))))
+    right: (comparison
+      field: (identifier)
+      value: (number))))
+
+==================
+Tes 6: Operator not dan boolean
+==================
+
+not archived = true
+
+---
+
+(query
+  (not_expression
+    operand: (comparison
+      field: (identifier)
+      value: (boolean))))
+
+==================
+Tes 7: Operator in dengan tiga nilai
+==================
+
+status in ("open", "pending", "closed")
+
+---
+
+(query
+  (in_expression
+    field: (identifier)
+    (string)
+    (string)
+    (string)))
+
+==================
+Tes 8: Operator contains
+==================
+
+title contains "invoice"
+
+---
+
+(query
+  (contains_expression
+    field: (identifier)
+    value: (string)))

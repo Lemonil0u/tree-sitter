@@ -54,7 +54,8 @@ if __name__ == "__main__":
         sys.exit(1)
 
     target_folder = Path(sys.argv[1])
-    for path in target_folder.rglob("*.py"):
+    # sorted() supaya urutan file selalu sama setiap kali dijalankan
+    for path in sorted(target_folder.rglob("*.py")):
         if any(bagian in FOLDER_DIABAIKAN for bagian in path.parts):
             continue
         cek_file(path)

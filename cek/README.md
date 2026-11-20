@@ -46,9 +46,9 @@ python cek/cek.py <path_folder_target>
 Hasil eksekusi pada folder uji (`cek/uji`):
 
 ```text
-[ERROR]   cek/uji/tes_error.py:1: ditemukan syntax error (ERROR)
+[ERROR]  cek/uji/tes_error.py:1: ditemukan syntax error (ERROR)
 [PANJANG] cek/uji/tes_panjang.py:1: fungsi 'fungsi_panjang' (34 baris)
-[TODO]    cek/uji/tes_todo.py:2: # TODO: rapikan kode ini
+[TODO]   cek/uji/tes_todo.py:2: # TODO: rapikan kode ini
 ```
 
 Hasil eksekusi pada file proyek nyata (`docs/scraper_v1.1.py`):
@@ -56,6 +56,26 @@ Hasil eksekusi pada file proyek nyata (`docs/scraper_v1.1.py`):
 ```text
 [PANJANG] docs/scraper_v1.1.py:89: fungsi 'scrape_traveloka_v11' (171 baris)
 ```
+
+---
+
+## Uji pada Repositori Open Source
+
+Repo uji: [psf/requests](https://github.com/psf/requests), commit `3c7baaa` (26 Oktober 2026), berisi 37 file `.py`.
+
+```bash
+git clone --depth 1 https://github.com/psf/requests
+python cek/cek.py requests > cek/hasil_repo_requests.txt
+```
+
+Hasil lengkap ada di `hasil_repo_requests.txt`: 63 temuan, terdiri dari 56 fungsi lebih dari 30 baris, 7 komentar TODO, dan 0 file dengan syntax error.
+
+Pengecekan manual pada 2 file. Pembandingnya dihitung tanpa tree-sitter: panjang fungsi memakai modul `ast` bawaan Python (`end_lineno - lineno + 1`), dan TODO memakai `grep -n -E 'TODO|FIXME'`.
+
+| File | Hasil `cek.py` | Hasil pengecekan manual | Cocok? |
+| --- | --- | --- | --- |
+| `src/requests/api.py` (180 baris, 8 fungsi) | `request` baris 24, 48 baris | `request` baris 24-71 = 48 baris. 7 fungsi lain 10-18 baris. Tidak ada TODO | Ya |
+| `src/requests/hooks.py` (48 baris, 2 fungsi) | TODO di baris 29 | `grep` menemukan TODO di baris 29. Fungsi terpanjang `dispatch_hook` 17 baris | Ya |
 
 ---
 

@@ -16,7 +16,7 @@
 #define FIELD_COUNT 6
 #define MAX_ALIAS_SEQUENCE_LENGTH 6
 #define MAX_RESERVED_WORD_SET_SIZE 0
-#define PRODUCTION_ID_COUNT 6
+#define PRODUCTION_ID_COUNT 9
 #define SUPERTYPE_COUNT 0
 
 enum ts_symbol_identifiers {
@@ -278,7 +278,10 @@ static const TSMapSlice ts_field_map_slices[PRODUCTION_ID_COUNT] = {
   [2] = {.index = 1, .length = 3},
   [3] = {.index = 4, .length = 2},
   [4] = {.index = 6, .length = 2},
-  [5] = {.index = 8, .length = 1},
+  [5] = {.index = 8, .length = 2},
+  [6] = {.index = 10, .length = 1},
+  [7] = {.index = 11, .length = 3},
+  [8] = {.index = 14, .length = 2},
 };
 
 static const TSFieldMapEntry ts_field_map_entries[] = {
@@ -296,6 +299,16 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
     {field_right, 2},
   [8] =
     {field_field, 0},
+    {field_value, 3},
+  [10] =
+    {field_value, 1},
+  [11] =
+    {field_field, 0},
+    {field_value, 3},
+    {field_value, 4, .inherited = true},
+  [14] =
+    {field_value, 0, .inherited = true},
+    {field_value, 1, .inherited = true},
 };
 
 static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE_LENGTH] = {
@@ -798,17 +811,17 @@ static const uint16_t ts_small_parse_table[] = {
     STATE(23), 1,
       aux_sym_in_expression_repeat1,
   [252] = 1,
-    ACTIONS(60), 2,
+    ACTIONS(62), 2,
       anon_sym_COMMA,
       anon_sym_RPAREN,
   [257] = 1,
-    ACTIONS(62), 1,
+    ACTIONS(64), 1,
       ts_builtin_sym_end,
   [261] = 1,
-    ACTIONS(64), 1,
+    ACTIONS(66), 1,
       anon_sym_LPAREN,
   [265] = 1,
-    ACTIONS(66), 1,
+    ACTIONS(68), 1,
       sym_string,
 };
 
@@ -864,18 +877,19 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [37] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_comparison, 3, 0, 2),
   [39] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_in_expression, 5, 0, 5),
   [41] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_and_expression, 3, 0, 4),
-  [43] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_in_expression, 6, 0, 5),
+  [43] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_in_expression, 6, 0, 7),
   [45] = {.entry = {.count = 1, .reusable = true}}, SHIFT(12),
   [47] = {.entry = {.count = 1, .reusable = true}}, SHIFT(4),
   [49] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_query, 1, 0, 0),
   [51] = {.entry = {.count = 1, .reusable = true}}, SHIFT(8),
   [53] = {.entry = {.count = 1, .reusable = true}}, SHIFT(16),
   [55] = {.entry = {.count = 1, .reusable = true}}, SHIFT(18),
-  [57] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_in_expression_repeat1, 2, 0, 0), SHIFT_REPEAT(8),
-  [60] = {.entry = {.count = 1, .reusable = true}}, REDUCE(aux_sym_in_expression_repeat1, 2, 0, 0),
-  [62] = {.entry = {.count = 1, .reusable = true}},  ACCEPT_INPUT(),
-  [64] = {.entry = {.count = 1, .reusable = true}}, SHIFT(9),
-  [66] = {.entry = {.count = 1, .reusable = true}}, SHIFT(13),
+  [57] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_in_expression_repeat1, 2, 0, 8), SHIFT_REPEAT(8),
+  [60] = {.entry = {.count = 1, .reusable = true}}, REDUCE(aux_sym_in_expression_repeat1, 2, 0, 8),
+  [62] = {.entry = {.count = 1, .reusable = true}}, REDUCE(aux_sym_in_expression_repeat1, 2, 0, 6),
+  [64] = {.entry = {.count = 1, .reusable = true}},  ACCEPT_INPUT(),
+  [66] = {.entry = {.count = 1, .reusable = true}}, SHIFT(9),
+  [68] = {.entry = {.count = 1, .reusable = true}}, SHIFT(13),
 };
 
 #ifdef __cplusplus

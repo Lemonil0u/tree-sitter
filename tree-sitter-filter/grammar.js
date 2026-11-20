@@ -35,8 +35,8 @@ export default grammar({
       field('field', $.identifier),
       'in',
       '(',
-      $._value,
-      repeat(seq(',', $._value)),
+      field('value', $._value),
+      repeat(seq(',', field('value', $._value))),
       ')'
     ),
 

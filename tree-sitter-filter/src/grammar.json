@@ -114,8 +114,12 @@
           "value": "("
         },
         {
-          "type": "SYMBOL",
-          "name": "_value"
+          "type": "FIELD",
+          "name": "value",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_value"
+          }
         },
         {
           "type": "REPEAT",
@@ -127,8 +131,12 @@
                 "value": ","
               },
               {
-                "type": "SYMBOL",
-                "name": "_value"
+                "type": "FIELD",
+                "name": "value",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_value"
+                }
               }
             ]
           }

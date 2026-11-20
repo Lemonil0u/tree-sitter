@@ -1,20 +1,20 @@
 === DAFTAR FUNGSI & JUMLAH PARAMETER ===
-human_delay 2
-gentle_human_behavior 1
-parse_price 1
-map_seat_class 1
-build_datetime 2
-calc_duration 2
-segment_id 1
-scrape_traveloka_v11 0
-seg_to_dict 1
+baris 42: human_delay(min_sec=1.5, max_sec=4.0) -> 2 parameter
+baris 45: gentle_human_behavior(page) -> 1 parameter
+baris 53: parse_price(raw: str) -> 1 parameter
+baris 60: map_seat_class(kelas_raw: str) -> 1 parameter
+baris 71: build_datetime(tanggal: str, jam: str) -> 2 parameter
+baris 78: calc_duration(dep: datetime, arr: datetime) -> 2 parameter
+baris 84: segment_id(index: int) -> 1 parameter
+baris 89: scrape_traveloka_v11() -> 0 parameter
+baris 220: seg_to_dict(s: TransportSegment) -> 1 parameter
 
 === PEMANGGILAN PRINT ===
 @fn  baris 90: print
-@fn  baris 132: print
-@fn  baris 128: print
-@fn  baris 92: print
 @fn  baris 91: print
+@fn  baris 92: print
+@fn  baris 128: print
+@fn  baris 132: print
 @fn  baris 136: print
 @fn  baris 207: print
 @fn  baris 214: print
@@ -24,10 +24,10 @@ seg_to_dict 1
 @fn  baris 254: print
 @fn  baris 264: print
 @args  baris 90: ("\n" + "=" * 85)
-@args  baris 132: ("Menunggu hasil kereta...")
-@args  baris 128: (f"\nURL: {url}")
-@args  baris 92: ("=" * 85)
 @args  baris 91: ("   TRAVELOKA KERETA SCRAPER v11 - OUTPUT TransportSegment")
+@args  baris 92: ("=" * 85)
+@args  baris 128: (f"\nURL: {url}")
+@args  baris 132: ("Menunggu hasil kereta...")
 @args  baris 136: (f"Ditemukan {len(cards)} raw cards (sebelum filter)")
 @args  baris 207: (
                         f"   [{seg.id}] {seg.provider} | {seg.seat_class} "
@@ -37,19 +37,43 @@ seg_to_dict 1
 @args  baris 214: (f"   [SKIP] Card {i+1} gagal diekstrak: {e}")
 @args  baris 217: (f"\nTotal TransportSegment valid: {len(segments)}")
 @args  baris 249: (f"Disimpan ke '{CONFIG['output_json']}' (total: {len(all_data)} entri)")
-@args  baris 264: (f"\n[DONE] Mengembalikan {len(result)} TransportSegment object")
-@args  baris 254: ("Screenshot disimpan → traveloka_error.png")
 @args  baris 252: (f"ERROR: {e}")
+@args  baris 254: ("Screenshot disimpan → traveloka_error.png")
+@args  baris 264: (f"\n[DONE] Mengembalikan {len(result)} TransportSegment object")
 
 === DAFTAR IMPORT ===
 @modul  baris 2: asyncio
-@modul  baris 6: re
-@modul  baris 5: os
-@modul  baris 4: random
 @modul  baris 3: json
+@modul  baris 4: random
+@modul  baris 5: os
+@modul  baris 6: re
 @modul  baris 7: sys
-@modul  baris 16: dataclasses
+@modul  baris 8: datetime
 @modul  baris 9: playwright.async_api
 @modul  baris 13: models
+@modul  baris 16: dataclasses
 @modul  baris 17: typing
-@modul  baris 8: datetime
+
+=== DOCSTRING (pengayaan) ===
+@docstring  baris 54: """'Rp 410.000' → 410000.0"""
+@docstring  baris 61: """'Eksekutif (AC)' → 'Executive', dst."""
+@docstring  baris 72: """
+    Gabungkan tanggal + jam jadi datetime.
+    Jika jam tiba < jam berangkat, asumsikan tiba keesokan harinya.
+    """
+@docstring  baris 79: """Durasi dalam menit; tangani kasus overnight (arr < dep)."""
+
+=== PEMBANDING: grep -n print ../docs/scraper_v1.1.py ===
+90:    print("\n" + "=" * 85)
+91:    print("   TRAVELOKA KERETA SCRAPER v11 - OUTPUT TransportSegment")
+92:    print("=" * 85)
+128:            print(f"\nURL: {url}")
+132:            print("Menunggu hasil kereta...")
+136:            print(f"Ditemukan {len(cards)} raw cards (sebelum filter)")
+207:                    print(
+214:                    print(f"   [SKIP] Card {i+1} gagal diekstrak: {e}")
+217:            print(f"\nTotal TransportSegment valid: {len(segments)}")
+249:            print(f"Disimpan ke '{CONFIG['output_json']}' (total: {len(all_data)} entri)")
+252:            print(f"ERROR: {e}")
+254:            print("Screenshot disimpan → traveloka_error.png")
+264:    print(f"\n[DONE] Mengembalikan {len(result)} TransportSegment object")
